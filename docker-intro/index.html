@@ -76,6 +76,7 @@
           <h2>Agenda</h2>
           <ul>
             <li><a href="#/what-docker">Docker?! What's that?</a></li>
+            <li><a href="#/concepts">Concepts: VMs and containers</a></li>
             <li><a href="#/docker-use-cases">How Docker can help you</a></li>
             <li><a href="#/docker-compose">About Docker Compose</a></li>
           </ul>
@@ -89,86 +90,98 @@
             <li>
               How do you <b>run</b> your applications? Is there a difference between local, test, UA and prod envs?
             </li>
-          </ul>
-          <p>Docker and the concept of <b>containerization</b> is about <b>deploying and running software applications</b>.</p>
-        </section>
-
-        <section id="virtual-machines">
-          <h2>Virtual Machines</h2>
-          <ul>
-            <li><b>Virtual Machine</b> - a complete (guest) operating system, possibly with your applications, running on the VM host's operating system.</li>
             <li>
-              Pros: <b>full process isolation</b> for applications, so issues in guest OS are not supposed to break host OS, and vice versa
-            </li>
-            <li>
-              Cons: <b>virtualizing hardware</b> is very expensive computational-wise
-            </li>
-            <li>
-              End result: You'd rather <b>not</b> run tens of VMs on your laptop.
+              How do you <b>communicate</b> deployment between teams? How many teams are engaged? What do you pass between them?
             </li>
           </ul>
         </section>
 
-        <section id="containers">
-          <h2>Containers</h2>
-          <ul>
-            <li><b>Container</b> - a <i>namespaced</i> process on Docker host</li>
-            <li>
-              Pros: a container is <b>a mere Linux process</b> that's isolated from the other containers
-            </li>
-            <li>
-              Cons: <b>partial isolation</b> and compromising a Docker host's OS affects all containers on the host.
-            </li>
-            <li>
-              End result: You will be running tens of containers on your laptop (one per application or even a service)
-            </li>
-          </ul>
-        </section>
-
-        <section id="containers-inside-vms">
-          <h2>Containers inside Virtual Machines</h2>
-          <ul>
-            <li>
-              Pros: a container is <b>a mere Linux process</b> that's isolated from the other containers
-            </li>
-            <li>
-              Pros: a VM gives <b>full process isolation</b> for applications
-            </li>
-            <li>
-              End result: secure isolated lightweight environment
-            </li>
-          </ul>
-        </section>
-
-        <section id="docker-helps-you">
-          <h2>How Docker can help you</h2>
-          <ul>
-            <li>
-              Image <b>portability</b> with software packaged inside with all the necessary dependencies.
-            </li>
-            <li>
-              <b>Containers</b> boot up <b>fast</b> (far more faster than VMs)
-            </li>
-            <li>
-              <b>Service per container</b> - mix and match services (containers) that all together offer a complete application
-            </li>
-          </ul>
-        </section>
-
-        <section id="docker-cloud">
-          <h2>build once, run anywhere</h2>
-          <ul>
-            <li>Moving from one deployment environment to another is a no-brainer since application services (or entire applications) are already deployed inside containers, ready to be run.</li>
-            <li>
-              Easy deployment means evaluating different hosting providers simpler
-            </li>
-            <li>
-              Gives developers and organizations flexibility to use more price-competitive hosting providers and services
-            </li>
-          </ul>
+        <section>
+          <p>Docker<small>1</small> is about <b>deploying and running software applications</b>.</p>
           <p>
-            <b>Adaptive applications</b> move from a cloud provider to another with ease
+            <small>[1] And the concept of <b>containerization</b> in general</small>
           </p>
+        </section>
+
+        <section id="concepts">
+          <section id="virtual-machines">
+            <h2>Virtual Machines</h2>
+            <ul>
+              <li><b>Virtual Machine</b> - a complete (guest) operating system, possibly with your applications, running on the VM host's operating system.</li>
+              <li>
+                Pros: <b>full process isolation</b> for applications, so issues in guest OS are not supposed to break host OS, and vice versa
+              </li>
+              <li>
+                Cons: <b>virtualizing hardware</b> is very expensive computational-wise
+              </li>
+              <li>
+                End result: You'd rather <b>not</b> run tens of VMs on your laptop.
+              </li>
+            </ul>
+          </section>
+
+          <section id="containers">
+            <h2>Containers</h2>
+            <ul>
+              <li><b>Container</b> - a <i>namespaced</i> process on Docker host</li>
+              <li>
+                Pros: a container is <b>a mere Linux process</b> that's isolated from the other containers
+              </li>
+              <li>
+                Cons: <b>partial isolation</b> and compromising a Docker host's OS affects all containers on the host.
+              </li>
+              <li>
+                End result: You will be running tens of containers on your laptop (one per application or even a service)
+              </li>
+            </ul>
+          </section>
+
+          <section id="containers-inside-vms">
+            <h2>Containers inside Virtual Machines</h2>
+            <ul>
+              <li>
+                Pros: a container is <b>a mere Linux process</b> that's isolated from the other containers
+              </li>
+              <li>
+                Pros: a VM gives <b>full process isolation</b> for applications
+              </li>
+              <li>
+                End result: secure isolated lightweight environment
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section id="docker-use-cases">
+          <section>
+            <h2>How Docker can help you</h2>
+            <ul>
+              <li>
+                Image <b>portability</b> with software packaged inside with all the necessary dependencies.
+              </li>
+              <li>
+                <b>Containers</b> boot up <b>fast</b> (far more faster than VMs)
+              </li>
+              <li>
+                <b>Service per container</b> - mix and match services (containers) that all together offer a complete application
+              </li>
+            </ul>
+          </section>
+          <section id="adaptive-applications">
+            <h2>build once, run anywhere</h2>
+            <ul>
+              <li>Moving from one deployment environment to another is a no-brainer since application services (or entire applications) are already deployed inside containers, ready to be run.</li>
+              <li>
+                Easy deployment means evaluating different hosting providers simpler
+              </li>
+              <li>
+                Gives developers and organizations flexibility to use more price-competitive hosting providers and services
+              </li>
+            </ul>
+            <p>
+              <b>Adaptive applications</b> move from a cloud provider to another with ease
+            </p>
+          </section>
         </section>
 
         <section id="orchestrating-over-provisioning">
@@ -211,6 +224,11 @@
             </ul>
             <p><small>Reference: <a href="https://docs.docker.com/compose/">Overview of Docker Compose</a></small></p>
           </section>
+        </section>
+
+        <section id="credits">
+          <h2>Credits</h2>
+          The complete list of materials I was using to prepare this slide deck is at <a href="https://delicious.com/jlaskowski/docker">my account at Deli.cio.us under tag "docker"</a>.
         </section>
 
         <section data-background-image="images/end.jpg">
