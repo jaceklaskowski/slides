@@ -41,7 +41,7 @@
           <h1>Demystifying Docker</h1>
           <h3>Have Containers work for you</h3>
           <br>
-          <h4><a href="https://blog.jaceklaskowski.pl">Jacek Laskowski</a> / <a href="https://twitter.com/jaceklaskowski">@jaceklaskowski</a> / <a href="https://github.com/jaceklaskowski">GitHub</a></h4>
+          <h4><a href="https://blog.jaceklaskowski.pl">Jacek Laskowski</a> / <a href="https://twitter.com/jaceklaskowski">@jaceklaskowski</a> / <a href="https://github.com/jaceklaskowski">GitHub</a> / <a href="https://hub.docker.com/r/jaceklaskowski/">Docker Hub</a></h4>
         </section>
 
         <section data-transition="zoom">
@@ -49,61 +49,69 @@
           <p class="fragment">Press space to continue.</p>
         </section>
 
+        <section id="about-the-host">
+          <p>
+            <img width="20%" src="images/jacek_laskowski_20141201_512px.png">
+          </p>
+          <ul>
+            <li><b>Jacek Laskowski</b> is the host of this presentation</li>
+            <li>Self-employed at <a href="https://www.linkedin.com/in/jaceklaskowski">Japila Software</a> => jacek@japila.pl</li>
+            <li>Delivering Development Services | Consulting | Training</li>
+            <li>Building development teams</li>
+            <li>Follow me on twitter at <a href="https://twitter.com/jaceklaskowski">@JacekLaskowski</a></li>
+            <li>Scala developer in <a href="http://deepsense.io/">DeepSense.io</a> project</li>
+            <li>Founder and leader of <a href="http://warsawscala.pl">Warsaw Scala Enthusiasts</a></li>
+            <li><a href="https://java.net/website/java-champions/bios.html#Laskowski">Java Champion</a></li>
+            <li>Blogger at <a href="http://blog.jaceklaskowski.pl">blog.jaceklaskowski.pl</a> and <a href="http://jaceklaskowski.pl">jaceklaskowski.pl</a></li>
+          </ul>
+        </section>
+
+        <section id="agenda">
+          <h2>Agenda</h2>
+          <ul>
+            <li><a href="#/whats-docker">"Docker", you say?</a></li>
+            <li><a href="#/docker-concepts">Concepts in Docker</a></li>
+            <li><a href="#/docker-and-you">Docker and you</a></li>
+            <li><a href="#/docker-compose">About Docker Compose</a></li>
+            <li>
+              <a href="#/credits">Credits</a>
+            </li>
+          </ul>
+        </section>
+
+        <section id="whats-docker">
+          <h1>"Docker", you say?</h1>
+          <small>Got curious, huh? More questions coming, though.</small>
+        </section>
         <section>
           <section>
-            <p>
-              <img width="20%" src="images/jacek_laskowski_20141201_512px.png">
-            </p>
+            <h2>Docker?! What's that?</h2>
             <ul>
-              <li><b>Jacek Laskowski</b> is the host of this presentation</li>
-              <li>Self-employed at <a href="https://www.linkedin.com/in/jaceklaskowski">Japila Software</a> => jacek@japila.pl</li>
-              <li>Delivering Development Services | Consulting | Training</li>
-              <li>Building development teams</li>
-              <li>Follow me on twitter at <a href="https://twitter.com/jaceklaskowski">@JacekLaskowski</a></li>
-              <li>Scala developer in <a href="http://deepsense.io/">DeepSense.io</a> project</li>
-              <li>Founder and leader of <a href="http://warsawscala.pl">Warsaw Scala Enthusiasts</a></li>
-              <li><a href="https://java.net/website/java-champions/bios.html#Laskowski">Java Champion</a></li>
-              <li>Blogger at <a href="http://blog.jaceklaskowski.pl">blog.jaceklaskowski.pl</a> and <a href="http://jaceklaskowski.pl">jaceklaskowski.pl</a></li>
+              <li>How do you <b>deploy</b> your applications? What are the <b>deployment artifacts</b>?</li>
+              <li>How do you <b>set up</b> the machine(s) you deploy the applications to?</li>
+              <li>
+                How do you <b>run</b> your applications? Is there a difference between local, test, UA and prod envs?
+              </li>
+              <li>
+                How do you <b>communicate</b> deployment between teams? How many teams are engaged? What do you pass between them?
+              </li>
             </ul>
           </section>
           <section>
-            <h1>Picture time!</h1>
-            <a href="https://flic.kr/p/rdgugM"><img src="images/animal-smile.jpg"/></a>
+            <p>Docker<small>1</small> is about <b>deploying and running software applications</b>.</p>
+            <p>
+              <small>[1] And the concept of <b>containerization</b> in general</small>
+            </p>
           </section>
         </section>
 
+        <section id="docker-concepts">
+          <h1>Concepts in Docker</h1>
+          <small>
+            Virtual Machines, Containers, and such
+          </small>
+        </section>
         <section>
-          <h2>Agenda</h2>
-          <ul>
-            <li><a href="#/what-docker">Docker?! What's that?</a></li>
-            <li><a href="#/concepts">Concepts: VMs and containers</a></li>
-            <li><a href="#/docker-use-cases">How Docker can help you</a></li>
-            <li><a href="#/docker-compose">About Docker Compose</a></li>
-          </ul>
-        </section>
-
-        <section id="what-docker">
-          <h2>Docker?! What's that?</h2>
-          <ul>
-            <li>How do you <b>deploy</b> your applications? What are the <b>deployment artifacts</b>?</li>
-            <li>How do you <b>set up</b> the machine(s) you deploy the applications to?</li>
-            <li>
-              How do you <b>run</b> your applications? Is there a difference between local, test, UA and prod envs?
-            </li>
-            <li>
-              How do you <b>communicate</b> deployment between teams? How many teams are engaged? What do you pass between them?
-            </li>
-          </ul>
-        </section>
-
-        <section>
-          <p>Docker<small>1</small> is about <b>deploying and running software applications</b>.</p>
-          <p>
-            <small>[1] And the concept of <b>containerization</b> in general</small>
-          </p>
-        </section>
-
-        <section id="concepts">
           <section id="virtual-machines">
             <h2>Virtual Machines</h2>
             <ul>
@@ -152,9 +160,13 @@
           </section>
         </section>
 
-        <section id="docker-use-cases">
+        <section id="docker-and-you">
+          <h1>Docker and you</h1>
+          <small>Features you'd rather not miss</small>
+        </section>
+        <section>
           <section>
-            <h2>How Docker can help you</h2>
+            <h2>Features of Docker</h2>
             <ul>
               <li>
                 Image <b>portability</b> with software packaged inside with all the necessary dependencies.
@@ -228,7 +240,12 @@
 
         <section id="credits">
           <h2>Credits</h2>
-          The complete list of materials I was using to prepare this slide deck is at <a href="https://delicious.com/jlaskowski/docker">my account at Deli.cio.us under tag "docker"</a>.
+          <p>
+            The complete list of <b>articles and blog posts</b> I was learning Docker from to prepare this slide deck is at <a href="https://delicious.com/jlaskowski/docker">my account at Deli.cio.us under tag "docker"</a>.
+          </p>
+          <p>
+            <b>Videos</b> are at <a href="https://www.youtube.com/playlist?list=PLakV2aGPD5Lmn5MHQeMZaEk_-rAL40MM6">my "docker" playlist at YouTube</a>.
+          </p>
         </section>
 
         <section data-background-image="images/end.jpg">
