@@ -71,8 +71,14 @@
           <ul>
             <li><a href="#/whats-docker">"Docker", you say?</a></li>
             <li><a href="#/docker-concepts">Concepts in Docker</a></li>
+            <li>
+              <a href="#/docker-family">Docker Family</a>
+            </li>
             <li><a href="#/docker-and-you">Docker and you</a></li>
             <li><a href="#/docker-compose">About Docker Compose</a></li>
+            <li>
+              <a href="#/docker-windows-server">Docker for Windows Server 2016</a>
+            </li>
             <li>
               <a href="#/credits">Credits</a>
             </li>
@@ -108,19 +114,26 @@
         <section id="docker-concepts">
           <h1>Concepts in Docker</h1>
           <small>
-            Virtual Machines, Containers, and such
+            Virtual Machines, Images, Containers, Docker host, and others
           </small>
         </section>
         <section>
+          <section id="virtualization">
+            <h2>Virtualization (v12n)</h2>
+            <p>
+              <i>In computing, <b>virtualization</b> refers to the act of creating a <b>virtual</b> (rather than actual) version of something, including (but not limited to) a virtual <b>computer hardware</b> platform, <b>operating system (OS)</b>, <b>storage device</b>, or <b>computer network</b> resources.</i>
+            </p>
+            <small><a href="https://en.wikipedia.org/wiki/Virtualization">Virtualization from Wikipedia, the free encyclopedia</a></small>
+          </section>
           <section id="virtual-machines">
             <h2>Virtual Machines</h2>
             <ul>
-              <li><b>Virtual Machine</b> - a complete (guest) operating system, possibly with your applications, running on the VM host's operating system.</li>
+              <li><b>Virtual Machine</b> - a complete operating system (guest OS), possibly with your applications, running on yet another, the VM host's operating system (host OS).</li>
               <li>
-                Pros: <b>full process isolation</b> for applications, so issues in guest OS are not supposed to break host OS, and vice versa
+                Pros: <b>full process isolation with guaranteed resources</b> for applications, so issues in guest OS are not supposed to break host OS, and vice versa
               </li>
               <li>
-                Cons: <b>virtualizing hardware</b> is very expensive computational-wise
+                Cons: <b>virtualizing hardware</b> is very expensive computational- and disk space-wise
               </li>
               <li>
                 End result: You'd rather <b>not</b> run tens of VMs on your laptop.
@@ -158,24 +171,80 @@
               </li>
             </ul>
           </section>
+
+          <section id="images">
+            <h2>Images</h2>
+
+          </section>
+          <section id="docker-host">
+            <h2>Docker hosts</h2>
+
+          </section>
+          <section id="layered-filesystems">
+            <h2>Layered/Union File Systems</h2>
+
+          </section>
+        </section>
+
+        <section id="docker-family">
+          <h1>Docker Family</h1>
+        </section>
+        <section>
+          <section id="docker-1.8">
+            <h2>What they say in...Announcing Docker 1.8</h2>
+            <p>
+              <i>We’re thrilled to announce <b>Docker 1.8</b> with support for image signing, a new installer, as well as incremental improvements to <b>Engine</b>, <b>Compose</b>, <b>Swarm</b>, <b>Machine</b> and <b>Registry</b>.</i>
+            </p>
+            <small>From <a href="http://blog.docker.com/2015/08/docker-1-8-content-trust-toolbox-registry-orchestration/">ANNOUNCING DOCKER 1.8: CONTENT TRUST, TOOLBOX, AND UPDATES TO REGISTRY AND ORCHESTRATION</a></small>
+          </section>
+          <section>
+            <h2>Docker Engine</h2>
+            <p>
+              ...
+            </p>
+          </section>
+          <section>
+            <h2>Docker Compose</h2>
+            <p>
+              ...
+            </p>
+          </section>
+          <section>
+            <h2>Docker Swarm</h2>
+            <p>
+              ...
+            </p>
+          </section>
+          <section>
+            <h2>Docker Machine</h2>
+            <p>
+              ...
+            </p>
+          </section>
         </section>
 
         <section id="docker-and-you">
           <h1>Docker and you</h1>
-          <small>Features you'd rather not miss</small>
+          <small>Features you don't want to miss</small>
         </section>
         <section>
           <section>
             <h2>Features of Docker</h2>
             <ul>
               <li>
-                Image <b>portability</b> with software packaged inside with all the necessary dependencies.
+                Image <b>portability</b> across machines with software packaged inside with all the necessary dependencies.
+              </li>
+              <li>
+                <b>Rapid application deployment</b> that's just <code>docker run</code>
               </li>
               <li>
                 <b>Containers</b> boot up <b>fast</b> (far more faster than VMs)
               </li>
               <li>
                 <b>Service per container</b> - mix and match services (containers) that all together offer a complete application
+              </li>
+              <li>
+                <b>Versioning and component reuse</b> to minimize the disk size (and hence cut the time needed to transfer them between machines)
               </li>
             </ul>
           </section>
@@ -235,6 +304,72 @@
               <li>Run the application with <code>docker-compose up</code></li>
             </ul>
             <p><small>Reference: <a href="https://docs.docker.com/compose/">Overview of Docker Compose</a></small></p>
+          </section>
+        </section>
+
+        <section id="docker-windows-server">
+          <h1>Docker for</h1>
+          <h1>Windows Server 2016</h1>
+          <h3>Technical Preview</h3>
+        </section>
+        <section>
+          <section>
+            <h2>Docker Engine for Windows Server <small>(1 of 3)</small></h2>
+            <ul>
+              <li>
+                <a href="http://blog.docker.com/2015/08/tp-docker-engine-windows-server-2016/">Technical preview of Docker Engine for Windows Server 2016 Technical Preview 3 (TP3)</a>
+              </li>
+              <li>
+                <b>Docker Engine for Windows Server</b> - the same code base built for Linux and Windows
+              </li>
+              <li>
+                Most of the Docker commands work on Windows Server <b>natively</b>
+                <ul>
+                  <li>
+                    Write <code>Dockerfile</code> and <code>docker build</code> as you would on Linux
+                  </li>
+                  <li>
+                    <code>docker push</code> is <b>not</b> supported
+                  </li>
+                </ul>
+              </li>
+              <li>
+                They will never be exactly identical given the differences of the underlying platforms (but they're getting closer)
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Docker Engine for Windows Server <small>(2 of 3)</small></h2>
+            <ul>
+              <li>
+                <b>The Docker daemon for Windows Server</b> creates a sandboxed environment for the process, similarly to Linux
+              </li>
+              <li>
+                Microsoft has been adding containerization primitives (similar to Linux's <a href="http://man7.org/linux/man-pages/man7/namespaces.7.html">namespaces</a> and <a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">cgroups</a>) to the Windows kernel
+              </li>
+              <li>
+                  Use case: <b>distributing workloads</b> across <b>a mixed cluster of Linux and Windows Server hosts</b> orchestrated by <a href="https://www.docker.com/docker-swarm">Docker Swarm</a> using a single Docker CLI and the same Docker commands
+              </li>
+              <li>
+                No need for virtualization (using <a href="https://www.docker.com/docker-machine">Docker Machine</a> or similar)
+              </li>
+            </ul>
+          </section>
+          <section>
+            <h2>Docker Engine for Windows Server <small>(3 of 3)</small></h2>
+            <ul>
+              <li>
+                Docker uses <b>execdriver</b> to execute containers
+                <ul>
+                  <li>
+                    <a href="https://github.com/opencontainers/runc/tree/master/libcontainer">libcontainer</a> - a default implementation on Linux (with <a href="https://runc.io/">runC</a> soon)
+                  </li>
+                  <li>
+                    <a href="https://github.com/microsoft/hcsshim">microsoft/hccshim package</a> on Windows
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </section>
         </section>
 
