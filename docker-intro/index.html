@@ -230,9 +230,17 @@
           </section>
           <section>
             <h2>Docker Compose</h2>
-            <p>
-              ...
-            </p>
+            <ul>
+              <li>
+                Defines and runs multi-container (composed) applications
+              </li>
+              <li>
+                <code>extends</code> to <b>share configurations</b> between applications and <b>override portions</b> where needed
+              </li>
+              <li>
+                <a href="https://www.docker.com/docker-compose">Official home page</a>
+              </li>
+            </ul>
           </section>
           <section>
             <h2>Docker Swarm</h2>
@@ -308,15 +316,15 @@
             <h2>Docker Compose - what</h2>
             <ul>
               <li>tool for defining and running <b>multi-container applications</b> with Docker</li>
-              <li>define a multi-container application in <b>a single file</b></li>
-              <li>run a multi-container application with <b>a single command</b></li>
+              <li>defines multi-container application in <b>a single file</b></li>
+              <li>runs a multi-container application with <b>a single command</b></li>
             </ul>
             <p><small>Reference: <a href="https://docs.docker.com/compose/">Overview of Docker Compose</a></small></p>
           </section>
           <section>
             <h2>Docker Compose - where</h2>
             <ul>
-              <li>great for <b>development environments</b></li>
+              <li>Excellent for <b>different environments</b></li>
               <li>Not recommended for production usage</li>
             </ul>
             <p><small>Reference: <a href="https://docs.docker.com/compose/">Overview of Docker Compose</a></small></p>
@@ -329,6 +337,82 @@
               <li>Run the application with <code>docker-compose up</code></li>
             </ul>
             <p><small>Reference: <a href="https://docs.docker.com/compose/">Overview of Docker Compose</a></small></p>
+          </section>
+          <section>
+            <h2>Docker Compose - example <small>(1 of 3)</small></h2>
+            <p>
+              <b>Shared</b> (parent) configuration <code>common.yml</code>
+            </p>
+            <pre><code>
+              web:
+                build: .
+                ports:
+                 - "80:8000"
+                # ...any extra configuration...
+            </code></pre>
+          </section>
+          <section>
+            <h2>Docker Compose - example <small>(2 of 3)</small></h2>
+            <p>
+              <b>Development</b> configuration <code>docker-compose.yml</code>
+            </p>
+            <pre><code>
+                web:
+                  extends:
+                    file: common.yml
+                    service: web
+                  volumes:
+                    - .:/code
+                  links:
+                    - db
+                  environment:
+                    - DATABASE_URL=postgres://db:5432
+                db:
+                  image: postgres
+            </code></pre>
+            <code>docker-compose up</code>
+          </section>
+          <section>
+            <h2>Docker Compose - example <small>(3 of 3)</small></h2>
+            <p>
+              <b>Production</b> configuration <code>prod.yml</code>
+            </p>
+            <pre><code>
+web:
+  extends:
+    file: common.yml
+    service: web
+  environment:
+    - DATABASE_URL=postgres://production-db.example.com:12345
+            </code></pre>
+            <code>docker-compose -f prod.yml up</code>
+          </section>
+          <section>
+            <h2>Docker Compose - kafka-docker</h2>
+            <pre><code>
+            zookeeper:
+              image: wurstmeister/zookeeper
+              ports:
+                - "2181"
+            kafka:
+              build: .
+              ports:
+                - "9092"
+              links:
+                - zookeeper:zk
+              environment:
+                KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+              volumes:
+                - /var/run/docker.sock:/var/run/docker.sock
+            </code></pre>
+            <ul>
+              <li>
+                <a href="https://github.com/wurstmeister/kafka-docker">kafka-docker sources at GitHub</a>
+              </li>
+              <li>
+                <a href="http://wurstmeister.github.io/kafka-docker/">Kafka Docker's Tutorial</a>
+              </li>
+            </ul>
           </section>
         </section>
 
@@ -411,6 +495,9 @@
           <h2>Credits</h2>
           <p>
             The complete list of <b>articles and blog posts</b> I was learning Docker from to prepare this slide deck is at <a href="https://delicious.com/jlaskowski/docker">my account at Deli.cio.us under tag "docker"</a>.
+          </p>
+          <p>
+            There are few pins at <a href="https://www.pinterest.com/laskowskijacek/docker/">docker at Pinterest</a>, too.
           </p>
           <p>
             <b>Videos</b> are at <a href="https://www.youtube.com/playlist?list=PLakV2aGPD5Lmn5MHQeMZaEk_-rAL40MM6">my "docker" playlist at YouTube</a>.
