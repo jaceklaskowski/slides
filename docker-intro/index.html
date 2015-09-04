@@ -240,6 +240,9 @@
               <li>
                 <a href="https://www.docker.com/docker-compose">Official home page</a>
               </li>
+              <li>
+                Additional slides in <a href="#/docker-compose">Docker Compose</a>
+              </li>
             </ul>
           </section>
           <section>
@@ -315,8 +318,17 @@
           <section>
             <h2>Docker Compose - what</h2>
             <ul>
-              <li>tool for defining and running <b>multi-container applications</b> with Docker</li>
-              <li>defines multi-container application in <b>a single file</b></li>
+              <li>tool for defining and running <b>multi-container/multi-service applications</b> with Docker
+                <ul>
+                  <li>
+                    A container per service
+                  </li>
+                  <li>
+                    <b>Microservices</b>: <i><a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well">Do One Thing and Do It Well</a></i>
+                  </li>
+                </ul>
+              </li>
+              <li>defines multi-container application in <b>a single file</b> (defaults to <code>docker-compose.yml</code>)</li>
               <li>runs a multi-container application with <b>a single command</b></li>
             </ul>
             <p><small>Reference: <a href="https://docs.docker.com/compose/">Overview of Docker Compose</a></small></p>
@@ -324,8 +336,8 @@
           <section>
             <h2>Docker Compose - where</h2>
             <ul>
-              <li>Excellent for <b>different environments</b></li>
-              <li>Not recommended for production usage</li>
+              <li>Excellent to define configurations for <b>different environments</b>, e.g. development, staging, CI, <a href="http://blog.docker.com/2015/04/easily-configure-apps-for-multiple-environments-with-compose-1-2-and-much-more/">production</a></li>
+              <li><a href="http://docs.docker.com/compose/">Officially</a> not recommended for production usage</li>
             </ul>
             <p><small>Reference: <a href="https://docs.docker.com/compose/">Overview of Docker Compose</a></small></p>
           </section>
