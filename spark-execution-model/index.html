@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>Execution Model of Apache Spark (using spark-shell and WebUI)</title>
+
+    <meta name="description" content="Slides about Execution Model of Apache Spark (using spark-shell and WebUI)">
+    <meta name="author" content="Jacek Laskowski">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="reveal">
+
+      <div class="slides">
+        <section class="intro" data-transition="zoom">
+          <img style="background:none; border:none; box-shadow:none;" data-src="images/spark-logo.png">
+          <h1>Execution Model of Apache Spark</h1>
+          <h3>Using spark-shell and WebUI</h3>
+          <h4><a href="https://blog.jaceklaskowski.pl">Jacek Laskowski</a> / <a href="https://twitter.com/jaceklaskowski">@jaceklaskowski</a> / <a href="https://github.com/jaceklaskowski">GitHub</a> / <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/">Mastering Apache Spark</a></h4>
+        </section>
+
+        <section data-transition="zoom">
+          <h2>Use spacebar to transition between slides.</h2>
+          <p class="fragment">Press space to continue.</p>
+        </section>
+
+        <section id="about-the-host">
+          <p>
+            <img width="20%" src="images/jacek_laskowski_20141201_512px.png">
+          </p>
+          <ul>
+            <li><b>Jacek Laskowski</b> is self-employed at <a href="https://www.linkedin.com/in/jaceklaskowski">Japila Software</a>
+            <li>Ping me at » jacek@japila.pl «</li>
+            <li>Delivering Development Services | Consulting | Training</li>
+            <li>Building and leading development teams</li>
+            <li>Mostly <a href="http://spark.apache.org/">Apache Spark</a> and <a href="http://www.scala-lang.org/">Scala</a> these days</li>
+            <li>Follow me on twitter at <a href="https://twitter.com/jaceklaskowski">@JacekLaskowski</a></li>
+            <li>Founder and leader of <a href="http://warsawscala.pl">Warsaw Scala Enthusiasts</a></li>
+            <li><a href="https://java.net/website/java-champions/bios.html#Laskowski">Java Champion</a></li>
+            <li>Blogger at <a href="http://blog.jaceklaskowski.pl">blog.jaceklaskowski.pl</a> and <a href="http://jaceklaskowski.pl">jaceklaskowski.pl</a></li>
+          </ul>
+        </section>
+
+        <section id="agenda">
+          <h2>Agenda</h2>
+          <ul>
+            <li><a href="#/application-development-spark-shell">Anatomy of Spark Application - development using spark-shell</a></li>
+            <li><a href="#/application-execution-webui">Anatomy of Spark Application - execution and web UI</a></li>
+            <li>
+              <a href="#/credits">Credits</a>
+            </li>
+          </ul>
+        </section>
+
+        <section id="application-development-spark-shell">
+          <h1>Anatomy of Spark Application</h1>
+          <small><a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-anatomy-spark-application.html">Anatomy of Spark Application</a> using spark-shell</small>
+        </section>
+        <section>
+          <section>
+            <ul>
+              <li>Click <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-anatomy-spark-application.html">application flow</a>, and introduce SparkConf, SparkContext, spark-shell, spark-submit</li>
+              <li>
+                We're going to use <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-shell.html">spark-shell</a> and <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-webui.html">web UI</a>
+              </li>
+              <li>
+                Introduce <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-rdd-operations.html">Operations - Transformations and Actions</a>, RDD lineage graph, RDD Caching / Persistence.
+              </li>
+              <li>
+                That should cover <b>development part</b>.
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section id="application-execution-webui">
+          <h1>Anatomy of Spark Application</h1>
+          <small><a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-anatomy-spark-application.html">Anatomy of Spark Application</a> using web UI</small>
+        </section>
+        <section>
+          <section>
+            <ul>
+              <li>Click <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-rdd-operations.html#actions">Actions</a>, and introduce SparkContext.runJob, <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-dagscheduler.html#jobs">jobs</a>, stages.
+            </li>
+            <li>Show <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-dagscheduler.html">Figure 9. DAGScheduler.submitJob</a> and Figure 11. DAGScheduler.handleJobSubmitted</li>
+            <li>
+              Go to <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-taskscheduler.html">Task Scheduler</a>, TaskSet, TaskSetManager, show the figure in <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-taskscheduler.html#submitTasks">submitTasks</a>.
+            </li>
+            <li>
+              Introduce <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-scheduler-listeners.html">Scheduler Listeners</a> (web UI is one!), <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-sparkcontext.html#ConsoleProgressBar">ConsoleProgressBar</a>.
+            </li>
+            <li>
+              Finish with <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/content/spark-rdd-shuffle.html">RDD shuffling</a>
+            </li>
+            </ul>
+          </section>
+        </section>
+
+        <section id="credits">
+          <h2>Credits</h2>
+          <p>
+            You can find the credits and more in my latest project <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/">Mastering Apache Spark</a>.
+          </p>
+        </section>
+
+        <section data-background-image="images/end.jpg">
+          <!-- THAT'S IT FOLKS -->
+        </section>
+
+        <section style="text-align: left">
+          <h1>Questions?</h1>
+          <p>
+            - Visit <a href="https://blog.jaceklaskowski.pl">Jacek Laskowski's blog</a><br>
+            - Follow <a href="https://twitter.com/jaceklaskowski">@jaceklaskowski</a> at twitter<br>
+            - Use <a href="https://github.com/jaceklaskowski">Jacek's projects at GitHub</a><br>
+            - Read <a href="https://jaceklaskowski.gitbooks.io/mastering-apache-spark/">Mastering Apache Spark</a>
+          </p>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                { src: 'plugin/zoom-js/zoom.js', async: true },
+                { src: 'plugin/notes/notes.js', async: true }
+            ]
+        });
+
+    </script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-45999426-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
