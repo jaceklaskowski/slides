@@ -45,20 +45,38 @@
           <h4><a href="https://blog.jaceklaskowski.pl">Jacek Laskowski</a> / <a href="https://twitter.com/jaceklaskowski">@jaceklaskowski</a> / <a href="https://github.com/jaceklaskowski">GitHub</a> / <a href="http://bit.ly/mastering-apache-spark">Mastering Apache Spark Notes</a></h4>
         </section>
 
-        <section id="about-the-host">
-          <p>
-            <img width="20%" src="images/jacek_laskowski_20141201_512px.png" style="border: 0">
-          </p>
-          <ul>
-            <li><b>Jacek Laskowski</b> is an independent consultant</li>
-            <li>Contact me at <b>jacek@japila.pl</b> or <a href="https://twitter.com/jaceklaskowski">@JacekLaskowski</a></li>
-            <li>Delivering Development Services | Consulting | Training</li>
-            <li>Building and leading development teams</li>
-            <li>Mostly <a href="http://spark.apache.org/">Apache Spark</a> and <a href="http://www.scala-lang.org/">Scala</a> these days</li>
-            <li>Leader of <a href="http://warsawscala.pl">Warsaw Scala Enthusiasts</a> and <a href="http://www.meetup.com/Warsaw-Spark/">Warsaw Apache Spark</a></li>
-            <li><a href="https://java.net/website/java-champions/bios.html#Laskowski">Java Champion</a></li>
-            <li>Blogger at <a href="http://blog.jaceklaskowski.pl">blog.jaceklaskowski.pl</a> and <a href="http://jaceklaskowski.pl">jaceklaskowski.pl</a></li>
-          </ul>
+        <section>
+          <section id="about-the-host">
+            <p>
+              <img width="20%" src="images/jacek_laskowski_20141201_512px.png" style="border: 0">
+            </p>
+            <ul>
+              <li><b>Jacek Laskowski</b> is an independent consultant</li>
+              <li>Contact me at <b>jacek@japila.pl</b> or <a href="https://twitter.com/jaceklaskowski">@JacekLaskowski</a></li>
+              <li>Delivering Development Services | Consulting | Training</li>
+              <li>Building and leading development teams</li>
+              <li>Mostly <a href="http://spark.apache.org/">Apache Spark</a> and <a href="http://www.scala-lang.org/">Scala</a> these days</li>
+              <li>Leader of <a href="http://warsawscala.pl">Warsaw Scala Enthusiasts</a> and <a href="http://www.meetup.com/Warsaw-Spark/">Warsaw Apache Spark</a></li>
+              <li><a href="https://java.net/website/java-champions/bios.html#Laskowski">Java Champion</a></li>
+              <li>Blogger at <a href="http://blog.jaceklaskowski.pl">blog.jaceklaskowski.pl</a> and <a href="http://jaceklaskowski.pl">jaceklaskowski.pl</a></li>
+            </ul>
+          </section>
+          <section id="about-github">
+            <p>
+              <a href="http://bit.ly/mastering-apache-spark">http://bit.ly/mastering-apache-spark</a>
+            </p>
+            <p>
+              <img width="80%" src="images/jaceklaskowski-github-public-contributions.png" style="border: 0">
+            </p>
+          </section>
+          <section id="about-notes">
+            <p>
+              <a href="http://bit.ly/mastering-apache-spark">http://bit.ly/mastering-apache-spark</a>
+            </p>
+            <p>
+              <img width="90%" src="images/jaceklaskowski-gitbook-stats.png" style="border: 0">
+            </p>
+          </section>
         </section>
 
         <section>
@@ -81,11 +99,20 @@
                 SparkContext tracks how many RDDs were created.
                 <ul>
                   <li>
-                    You may see it in <code>toString</code> output.
+                    You may see it in <b>toString</b> output.
                   </li>
                 </ul>
               </li>
             </ul>
+            <p class="fragment">
+              <img width="90%" src="images/spark-rdd-id.png" style="border: 0">
+            </p>
+          </section>
+          <section id="sparkcontext-intro">
+            <h2>SparkContext and RDDs (2)</h2>
+            <p>
+              <img src="images/sparkcontext-rdds.png" style="border: 0">
+            </p>
           </section>
         </section>
 
@@ -171,7 +198,7 @@ _We're going to talk about the level of parallelism later._ <!-- li.element: cla
 ## Creating RDD - DataFrames
 
 * RDDs are so last year :-) Use DataFrames..._early and often!_
-* <!-- .element: class="fragment" --> A **DataFrame** is a higher-level abstraction over RDDs and structured data.
+* <!-- .element: class="fragment" --> A **DataFrame** is a higher-level abstraction over RDDs and semi-structured data.
 * <!-- .element: class="fragment" --> DataFrames require a **SQLContext**.
             </script>
           </section>
@@ -279,6 +306,18 @@ res1: String = local[*]
 * <!-- li.element: class="fragment" --> **DAGScheduler** manages a "DAG" of RDDs (aka **RDD lineage**)
 * <!-- li.element: class="fragment" --> **SchedulerBackends** manage TaskSets
             </script>
+          </section>
+          <section>
+            <h2>DAGScheduler</h2>
+            <p>
+              <img src="images/dagscheduler-rdd-partitions-job-resultstage.png" style="border: 0">
+            </p>
+          </section>
+          <section>
+            <h2>TaskScheduler and SchedulerBackend</h2>
+            <p>
+              <img src="images/sparkstandalone-sparkcontext-taskscheduler-schedulerbackend.png" style="border: 0">
+            </p>
           </section>
           <section data-transition="zoom" data-markdown>
             <script type="text/template">
