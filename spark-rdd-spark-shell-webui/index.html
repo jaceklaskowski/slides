@@ -62,9 +62,172 @@
         </section>
 
         <section>
+          <section id="sparkcontext">
+            <h1>SparkContext</h1>
+            <h3>The living space for RDDs</h3>
+          </section>
+          <section id="sparkcontext-intro">
+            <h2>SparkContext and RDDs</h2>
+            <ul>
+              <li>
+                An RDD belongs to <i><b>one and only one</b></i> Spark context.
+                <ul>
+                  <li>
+                    You <i><b>cannot</b></i> share RDDs between contexts.
+                  </li>
+                </ul>
+              </li>
+              <li>
+                SparkContext tracks how many RDDs were created.
+                <ul>
+                  <li>
+                    You may see it in <code>toString</code> output.
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
           <section id="rdd">
             <h1>RDD</h1>
             <h3>Resilient Distributed Dataset</h3>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Creating RDD - sc.parallelize
+
+* **`sc.parallelize(col, slices)`** to distribute a local collection of any elements.
+
+```
+scala> val rdd = sc.parallelize(0 to 10)
+rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[10] at parallelize at <console>:24
+```
+
+* <!-- li.element: class="fragment" --> Alternatively, **`sc.makeRDD(col, slices)`**
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Creating RDD - sc.range
+
+* **`sc.range(start, end, step, slices)`** to create RDD of long numbers.
+
+```
+scala> val rdd = sc.range(0, 100)
+rdd: org.apache.spark.rdd.RDD[Long] = MapPartitionsRDD[14] at range at <console>:24
+```
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Creating RDD - sc.textFile
+
+* **`sc.textFile(name, partitions)`** to create a RDD of lines from a file.
+
+```
+scala> val rdd = sc.textFile("README.md")
+rdd: org.apache.spark.rdd.RDD[String] = README.md MapPartitionsRDD[16] at textFile at <console>:24
+```
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Creating RDD - sc.wholeTextFiles
+
+* **`sc.wholeTextFiles(name, partitions)`** to create a RDD of pairs of a file name and its content from a directory.
+
+```
+scala> val rdd = sc.wholeTextFiles("tags")
+rdd: org.apache.spark.rdd.RDD[(String, String)] = tags MapPartitionsRDD[18] at wholeTextFiles at <console>:24
+```
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+There are many more more advanced functions in `SparkContext` to create RDDs.
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Partitions (and slices)
+
+* Did you notice the words **slices** and **partitions** as parameters?
+* <!-- li.element: class="fragment" --> **Partitions** (aka _slices_) are the **level of parallelism**.
+
+<!-- .element: align="center" -->
+_We're going to talk about the level of parallelism later._ <!-- li.element: class="fragment" -->
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Creating RDD - DataFrames
+
+* RDDs are so last year :-) Use DataFrames..._early and often!_
+* <!-- .element: class="fragment" --> A **DataFrame** is a higher-level abstraction over RDDs and structured data.
+* <!-- .element: class="fragment" --> DataFrames require a **SQLContext**.
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+## From RDDs to DataFrames
+
+```
+scala> val rdd = sc.parallelize(0 to 10)
+rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[51] at parallelize at <console>:24
+
+scala> val df = rdd.toDF
+df: org.apache.spark.sql.DataFrame = [_1: int]
+
+scala> val df = rdd.toDF("numbers")
+df: org.apache.spark.sql.DataFrame = [numbers: int]
+```
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+## ...And vice versa
+
+```
+scala> val rdd = sc.parallelize(0 to 10)
+rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[51] at parallelize at <console>:24
+
+scala> val df = rdd.toDF("numbers")
+df: org.apache.spark.sql.DataFrame = [numbers: int]
+
+scala> df.rdd
+res23: org.apache.spark.rdd.RDD[org.apache.spark.sql.Row] = MapPartitionsRDD[70] at rdd at <console>:29
+```
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Creating DataFrames - sqlContext.createDataFrame
+
+* **`sqlContext.createDataFrame(rowRDD, schema)`**
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Creating DataFrames - sqlContext.read
+
+* **`sqlContext.read`** is the modern yet _experimental_ way.
+* **`sqlContext.read.format(f).load(path)`**, where `f` is:
+ * jdbc
+ * json
+ * orc
+ * parquet
+ * text
+            </script>
           </section>
         </section>
 
@@ -72,18 +235,174 @@
           <section id="execution-environment">
             <h1>Execution Environment</h1>
           </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Partitions and Level of Parallelism
+
+* The number of partitions of a RDD is (roughly) the number of tasks.
+* Partitions are the hint to size jobs.
+* **Tasks** are the smallest unit of execution.
+* Tasks belong to **TaskSets**.
+* TaskSets belong to **Stages**.
+* Stages belong to **Jobs**.
+* Jobs, stages, and tasks are displayed in **web UI**.
+
+_We're going to talk about the web UI later._ <!-- li.element: class="fragment" -->
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Partitions and Level of Parallelism cd.
+
+* In **local[*]** mode, the number of partitions equals the number of cores (the default in `spark-shell`)
+
+```
+scala> sc.defaultParallelism
+res0: Int = 8
+
+scala> sc.master
+res1: String = local[*]
+```
+
+* <!-- li.element: class="fragment" --> Not necessarily true when you use **local** or **local[n]** master URLs.
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Level of Parallelism in Spark Clusters
+
+* **TaskScheduler** controls the level of parallelism
+* <!-- li.element: class="fragment" --> **DAGScheduler**, TaskScheduler, **SchedulerBackend** work in tandem
+* <!-- li.element: class="fragment" --> **DAGScheduler** manages a "DAG" of RDDs (aka **RDD lineage**)
+* <!-- li.element: class="fragment" --> **SchedulerBackends** manage TaskSets
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## RDD lineage
+
+* **RDD lineage** is a graph of RDD dependencies.
+* <!-- li.element: class="fragment" --> Use **toDebugString** to know the lineage.
+* <!-- li.element: class="fragment" --> Be careful with the hops - they introduce **shuffle barriers**.
+* <!-- li.element: class="fragment" --> Why is the RDD lineage important?
+* <!-- li.element: class="fragment" --> This is the **R** in RDD - **resiliency**.
+* <!-- li.element: class="fragment" --> But deep lineage costs processing time, _doesn't it?_
+* <!-- li.element: class="fragment" --> **Persist** (aka **cache**) it early and often!
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## RDD lineage - demo
+
+* What does the following do?
+
+```
+val rdd = sc.parallelize(0 to 10).map(n => (n % 2, n)).groupBy(_._1)
+```
+
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## RDD lineage - demo cd.
+
+* How many stages are there?
+
+```
+// val rdd = sc.parallelize(0 to 10).map(n => (n % 2, n)).groupBy(_._1)
+scala> rdd.toDebugString
+res2: String =
+(2) ShuffledRDD[3] at groupBy at <console>:24 []
+ +-(2) MapPartitionsRDD[2] at groupBy at <console>:24 []
+    |  MapPartitionsRDD[1] at map at <console>:24 []
+    |  ParallelCollectionRDD[0] at parallelize at <console>:24 []
+```
+
+* <!-- li.element: class="fragment" --> Nothing happens yet - processing time-wise.
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Spark Clusters
+
+* Spark supports the following clusters:
+ * one-JVM local cluster
+ * Spark Standalone
+ * Apache Mesos
+ * Hadoop YARN
+* <!-- li.element: class="fragment" --> You use **--master** to select the cluster
+ * <!-- li.element: class="fragment" --> **spark://hostname:port** is for Spark Standalone
+* <!-- li.element: class="fragment" --> And you know the local master URL, _ain't you_?
+ * <!-- li.element: class="fragment" --> **local**, **local[n]**, or **local[*]**
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Mandatory Properties of Spark App
+
+Your task: Fill in the gaps below.
+
+**Any** Spark application **must** specify **a**<!-- .element: class="fragment" -->**pplication**<!-- .element: class="fragment" --> **n**<!-- .element: class="fragment" -->**ame** <!-- .element: class="fragment" --> (aka **appName** <!-- .element: class="fragment" -->) and **m**<!-- .element: class="fragment" -->**aster URL**. <!-- .element: class="fragment" -->
+ *  <!-- li.element: class="fragment" --> _Demo time!_ => spark-shell is a Spark app, too!
+            </script>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## Spark Standalone Cluster
+
+* The built-in Spark cluster
+* <!-- li.element: class="fragment" --> Start **standalone Master** with **sbin/start-master**
+ * <!-- li.element: class="fragment" --> Use **-h** to control the host name to bind to.
+* <!-- li.element: class="fragment" --> Start **standalone Worker** with **sbin/start-slave**
+ * <!-- li.element: class="fragment" --> Run single worker per machine (aka **node**)
+* <!-- li.element: class="fragment" --> http://localhost:8080/ = web UI for Standalone cluster
+ * <!-- li.element: class="fragment" --> Don't confuse it with the web UI of Spark application
+*  <!-- li.element: class="fragment" --> _Demo time!_ => Run Standalone cluster
+            </script>
+          </section>
         </section>
 
         <section>
           <section id="spark-shell">
             <h1>spark-shell</h1>
+            <h3>Spark REPL Application</h3>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## spark-shell and Spark Standalone
+
+* You can connect to Spark Standalone using **spark-shell** through **--master**<!-- .element: class="fragment" --> command-line option.
+ * <!-- li.element: class="fragment" --> _Demo time!_ => we've already started the Standalone cluster.
+            </script>
           </section>
         </section>
 
         <section>
-          <section id="webUI">
+          <section id="webui">
             <h1>webUI</h1>
-            <h3>Spark's Web Console</h3>
+            <h3>Web User Interface for Spark Application</h3>
+          </section>
+          <section data-transition="zoom" data-markdown>
+            <script type="text/template">
+            <!-- .slide: align="left" -->
+## webUI
+
+* It is available under http://localhost:4040/
+* <!-- li.element: class="fragment" --> You can disable it using **spark.ui.enabled** flag.
+* <!-- li.element: class="fragment" --> All the events are captured by **Spark listeners**
+ * <!-- li.element: class="fragment" --> You can register your own Spark listener.
+* <!-- li.element: class="fragment" --> _Demo time!_ => webUI in action with different master URLs
+            </script>
           </section>
         </section>
 
